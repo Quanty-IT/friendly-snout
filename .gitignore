@@ -1,0 +1,14 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Build
+/out/
+/target/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Environments
+*.env
