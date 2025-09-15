@@ -5,6 +5,8 @@ import modules.views.AnimalForm;
 import modules.views.LoginForm;
 import modules.models.User;
 
+// teste
+
 public class MainApp extends Application {
 
     @Override
