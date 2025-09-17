@@ -1,23 +1,33 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import modules.views.AnimalForm;
+import modules.views.AnimalListView;
 import modules.views.LoginForm;
 import modules.models.User;
 
 public class MainApp extends Application {
 
+    private BorderPane mainLayout;
+
     @Override
     public void start(Stage stage) {
         stage.setTitle("Pata Amiga");
 
+        // Cria o layout principal para gerenciar as telas
+        this.mainLayout = new BorderPane();
+
+        // O conteúdo inicial do mainLayout será a tela de login
         LoginForm login = new LoginForm((User u) -> {
-            AnimalForm animalForm = new AnimalForm();
-            stage.getScene().setRoot(animalForm);
+            // Após o login, o conteúdo do mainLayout muda para a lista de animais
+            AnimalListView animalView = new AnimalListView(this.mainLayout);
+            this.mainLayout.setCenter(animalView);
             stage.sizeToScene();
         });
+        this.mainLayout.setCenter(login);
 
-        Scene scene = new Scene(login, 420, 220);
+        // A cena da aplicação agora é o mainLayout, que gerencia todas as views
+        Scene scene = new Scene(this.mainLayout, 420, 220);
         stage.setScene(scene);
         stage.show();
     }
