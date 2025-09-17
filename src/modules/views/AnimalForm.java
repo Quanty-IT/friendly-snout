@@ -96,34 +96,20 @@ public class AnimalForm extends GridPane {
         this.setPadding(new Insets(20, 20, 20, 20));
 
         int row = 0;
-        this.add(new Label("Nome:"), 0, row);
-        this.add(nameField, 1, row++);
-        this.add(new Label("Sexo:"), 0, row);
-        this.add(sexComboBox, 1, row++);
-        this.add(new Label("EspÃ©cie:"), 0, row);
-        this.add(speciesComboBox, 1, row++);
-        this.add(new Label("RaÃ§a:"), 0, row);
-        this.add(breedComboBox, 1, row++);
-        this.add(new Label("Tamanho:"), 0, row);
-        this.add(sizeComboBox, 1, row++);
-        this.add(new Label("Cor:"), 0, row);
-        this.add(colorComboBox, 1, row++);
-        this.add(new Label("Nascimento:"), 0, row);
-        this.add(birthdateField, 1, row++);
-        this.add(new Label("Microchip:"), 0, row);
-        this.add(microchipField, 1, row++);
-        this.add(new Label("RGA:"), 0, row);
-        this.add(rgaField, 1, row++);
-        this.add(new Label("Castrado:"), 0, row);
-        this.add(castratedCheckBox, 1, row++);
-        this.add(new Label("FIV:"), 0, row);
-        this.add(fivComboBox, 1, row++);
-        this.add(new Label("FeLV:"), 0, row);
-        this.add(felvComboBox, 1, row++);
-        this.add(new Label("Status:"), 0, row);
-        this.add(statusComboBox, 1, row++);
-        this.add(new Label("ObservaÃ§Ãµes:"), 0, row);
-        this.add(notesField, 1, row++);
+        this.add(new Label("Nome:"), 0, row); this.add(nameField, 1, row++);
+        this.add(new Label("Sexo:"), 0, row); this.add(sexComboBox, 1, row++);
+        this.add(new Label("EspÃ©cie:"), 0, row); this.add(speciesComboBox, 1, row++);
+        this.add(new Label("RaÃ§a:"), 0, row); this.add(breedComboBox, 1, row++);
+        this.add(new Label("Tamanho:"), 0, row); this.add(sizeComboBox, 1, row++);
+        this.add(new Label("Cor:"), 0, row); this.add(colorComboBox, 1, row++);
+        this.add(new Label("Nascimento:"), 0, row); this.add(birthdateField, 1, row++);
+        this.add(new Label("Microchip:"), 0, row); this.add(microchipField, 1, row++);
+        this.add(new Label("RGA:"), 0, row); this.add(rgaField, 1, row++);
+        this.add(new Label("Castrado:"), 0, row); this.add(castratedCheckBox, 1, row++);
+        this.add(new Label("FIV:"), 0, row); this.add(fivComboBox, 1, row++);
+        this.add(new Label("FeLV:"), 0, row); this.add(felvComboBox, 1, row++);
+        this.add(new Label("Status:"), 0, row); this.add(statusComboBox, 1, row++);
+        this.add(new Label("ObservaÃ§Ãµes:"), 0, row); this.add(notesField, 1, row++);
 
         // Criando um HBox para os botões ficarem lado a lado
         HBox buttonBox = new HBox(10);
@@ -180,11 +166,11 @@ public class AnimalForm extends GridPane {
         medicineStage.setTitle("Marcas de Remédio");
         medicineStage.initModality(Modality.APPLICATION_MODAL);
 
-        MedicineBrandForm medicineForm = new MedicineBrandForm();
-        Scene scene = new Scene(medicineForm, 400, 200);
+        MedicineBrandView listView = new MedicineBrandView();
+        Scene scene = new Scene(listView, 600, 500);
 
         medicineStage.setScene(scene);
-        medicineStage.setResizable(false);
+        medicineStage.setResizable(true);
         medicineStage.showAndWait();
     }
 
