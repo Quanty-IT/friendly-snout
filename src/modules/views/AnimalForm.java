@@ -1,8 +1,12 @@
 package modules.views;
 
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modules.controllers.AnimalController;
 import modules.models.Animal;
 import config.Database;
@@ -43,30 +47,30 @@ public class AnimalForm extends GridPane {
         felvComboBox = new ComboBox<>();
         statusComboBox = new ComboBox<>();
 
-        sexComboBox.getItems().addAll("Macho", "Fêmea");
+        sexComboBox.getItems().addAll("Macho", "FÃªmea");
         speciesComboBox.getItems().addAll("Cachorro", "Gato");
         breedComboBox.getItems().addAll(
                 "S.R.D",
                 "Shih-tzu",
                 "Yorkshire Terrier",
-                "Spitz Alemão",
-                "Buldogue Francês",
+                "Spitz AlemÃ£o",
+                "Buldogue FrancÃªs",
                 "Poodle",
                 "Lhasa Apso",
                 "Golden Retriever",
                 "Rottweiler",
                 "Labrador Retriever",
                 "Pug",
-                "Pastor Alemão",
+                "Pastor AlemÃ£o",
                 "Border Collie",
                 "Chihuahua de Pelo Longo",
                 "Pastor Belga Malinois",
-                "Maltês"
+                "MaltÃªs"
         );
-        sizeComboBox.getItems().addAll("Pequeno", "Médio", "Grande");
+        sizeComboBox.getItems().addAll("Pequeno", "MÃ©dio", "Grande");
         colorComboBox.getItems().addAll("Preto", "Branco", "Cinza", "Marrom", "Dourado", "Creme", "Canela", "Malhado");
-        fivComboBox.getItems().addAll("Sim", "Não", "Não testado");
-        felvComboBox.getItems().addAll("Sim", "Não", "Não testado");
+        fivComboBox.getItems().addAll("Sim", "NÃ£o", "NÃ£o testado");
+        felvComboBox.getItems().addAll("Sim", "NÃ£o", "NÃ£o testado");
         statusComboBox.getItems().addAll("Quarentena", "Abrigado", "Adotado", "Perdido");
 
         birthdateField = new DatePicker();
@@ -84,26 +88,47 @@ public class AnimalForm extends GridPane {
         Button saveButton = new Button("Salvar");
         saveButton.setOnAction(e -> saveAnimal());
 
+        Button medicineButton = new Button("Marcas de Remédio");
+        medicineButton.setOnAction(e -> openMedicineBrandForm());
+
         this.setVgap(10);
         this.setHgap(10);
         this.setPadding(new Insets(20, 20, 20, 20));
 
         int row = 0;
-        this.add(new Label("Nome:"), 0, row); this.add(nameField, 1, row++);
-        this.add(new Label("Sexo:"), 0, row); this.add(sexComboBox, 1, row++);
-        this.add(new Label("Espécie:"), 0, row); this.add(speciesComboBox, 1, row++);
-        this.add(new Label("Raça:"), 0, row); this.add(breedComboBox, 1, row++);
-        this.add(new Label("Tamanho:"), 0, row); this.add(sizeComboBox, 1, row++);
-        this.add(new Label("Cor:"), 0, row); this.add(colorComboBox, 1, row++);
-        this.add(new Label("Nascimento:"), 0, row); this.add(birthdateField, 1, row++);
-        this.add(new Label("Microchip:"), 0, row); this.add(microchipField, 1, row++);
-        this.add(new Label("RGA:"), 0, row); this.add(rgaField, 1, row++);
-        this.add(new Label("Castrado:"), 0, row); this.add(castratedCheckBox, 1, row++);
-        this.add(new Label("FIV:"), 0, row); this.add(fivComboBox, 1, row++);
-        this.add(new Label("FeLV:"), 0, row); this.add(felvComboBox, 1, row++);
-        this.add(new Label("Status:"), 0, row); this.add(statusComboBox, 1, row++);
-        this.add(new Label("Observações:"), 0, row); this.add(notesField, 1, row++);
-        this.add(saveButton, 1, row);
+        this.add(new Label("Nome:"), 0, row);
+        this.add(nameField, 1, row++);
+        this.add(new Label("Sexo:"), 0, row);
+        this.add(sexComboBox, 1, row++);
+        this.add(new Label("EspÃ©cie:"), 0, row);
+        this.add(speciesComboBox, 1, row++);
+        this.add(new Label("RaÃ§a:"), 0, row);
+        this.add(breedComboBox, 1, row++);
+        this.add(new Label("Tamanho:"), 0, row);
+        this.add(sizeComboBox, 1, row++);
+        this.add(new Label("Cor:"), 0, row);
+        this.add(colorComboBox, 1, row++);
+        this.add(new Label("Nascimento:"), 0, row);
+        this.add(birthdateField, 1, row++);
+        this.add(new Label("Microchip:"), 0, row);
+        this.add(microchipField, 1, row++);
+        this.add(new Label("RGA:"), 0, row);
+        this.add(rgaField, 1, row++);
+        this.add(new Label("Castrado:"), 0, row);
+        this.add(castratedCheckBox, 1, row++);
+        this.add(new Label("FIV:"), 0, row);
+        this.add(fivComboBox, 1, row++);
+        this.add(new Label("FeLV:"), 0, row);
+        this.add(felvComboBox, 1, row++);
+        this.add(new Label("Status:"), 0, row);
+        this.add(statusComboBox, 1, row++);
+        this.add(new Label("ObservaÃ§Ãµes:"), 0, row);
+        this.add(notesField, 1, row++);
+
+        // Criando um HBox para os botões ficarem lado a lado
+        HBox buttonBox = new HBox(10);
+        buttonBox.getChildren().addAll(saveButton, medicineButton);
+        this.add(buttonBox, 1, row);
 
         nameField.setPrefWidth(240);
         sexComboBox.setPrefWidth(240);
@@ -150,6 +175,19 @@ public class AnimalForm extends GridPane {
         }
     }
 
+    private void openMedicineBrandForm() {
+        Stage medicineStage = new Stage();
+        medicineStage.setTitle("Marcas de Remédio");
+        medicineStage.initModality(Modality.APPLICATION_MODAL);
+
+        MedicineBrandForm medicineForm = new MedicineBrandForm();
+        Scene scene = new Scene(medicineForm, 400, 200);
+
+        medicineStage.setScene(scene);
+        medicineStage.setResizable(false);
+        medicineStage.showAndWait();
+    }
+
     private void clearForm() {
         nameField.clear();
         sexComboBox.getSelectionModel().clearSelection();
@@ -170,7 +208,7 @@ public class AnimalForm extends GridPane {
     private String convertSex(String v) {
         return switch (v) {
             case "Macho" -> "male";
-            case "Fêmea" -> "female";
+            case "FÃªmea" -> "female";
             default -> null;
         };
     }
@@ -188,19 +226,19 @@ public class AnimalForm extends GridPane {
             case "S.R.D" -> "mixed-breed";
             case "Shih-tzu" -> "shih-tzu";
             case "Yorkshire Terrier" -> "yorkshire-terrier";
-            case "Spitz Alemão" -> "german-spitz";
-            case "Buldogue Francês" -> "french-bulldog";
+            case "Spitz AlemÃ£o" -> "german-spitz";
+            case "Buldogue FrancÃªs" -> "french-bulldog";
             case "Poodle" -> "poodle";
             case "Lhasa Apso" -> "lhasa-apso";
             case "Golden Retriever" -> "golden-retriever";
             case "Rottweiler" -> "rottweiler";
             case "Labrador Retriever" -> "labrador-retriever";
             case "Pug" -> "pug";
-            case "Pastor Alemão" -> "german-shepherd";
+            case "Pastor AlemÃ£o" -> "german-shepherd";
             case "Border Collie" -> "border-collie";
             case "Chihuahua de Pelo Longo" -> "long-haired-chihuahua";
             case "Pastor Belga Malinois" -> "belgian-malinois";
-            case "Maltês" -> "maltese";
+            case "MaltÃªs" -> "maltese";
             default -> null;
         };
     }
@@ -208,7 +246,7 @@ public class AnimalForm extends GridPane {
     private String convertSize(String v) {
         return switch (v) {
             case "Pequeno" -> "small";
-            case "Médio" -> "medium";
+            case "MÃ©dio" -> "medium";
             case "Grande" -> "large";
             default -> null;
         };
@@ -231,8 +269,8 @@ public class AnimalForm extends GridPane {
     private String convertYesNoNotTested(String v) {
         return switch (v) {
             case "Sim" -> "yes";
-            case "Não" -> "no";
-            case "Não testado" -> "not-tested";
+            case "NÃ£o" -> "no";
+            case "NÃ£o testado" -> "not-tested";
             default -> null;
         };
     }
