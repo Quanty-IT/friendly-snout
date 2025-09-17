@@ -80,6 +80,8 @@ public class MedicineBrandView extends VBox {
         Button addButton = new Button("Adicionar Marca");
         addButton.setOnAction(e -> openAddForm());
 
+        Button editButton = new Button("Editar");
+        editButton.setOnAction(e -> editSelected());
 
         Button deleteButton = new Button("Excluir");
         deleteButton.setOnAction(e -> deleteSelected());
@@ -88,7 +90,7 @@ public class MedicineBrandView extends VBox {
         refreshButton.setOnAction(e -> loadData());
 
         HBox buttonBox = new HBox(10);
-        buttonBox.getChildren().addAll(addButton, deleteButton, refreshButton);
+        buttonBox.getChildren().addAll(addButton, editButton, deleteButton, refreshButton);
         buttonBox.setPadding(new Insets(10, 0, 10, 0));
 
         this.setPadding(new Insets(20));
@@ -123,10 +125,34 @@ public class MedicineBrandView extends VBox {
         formStage.setScene(scene);
         formStage.setResizable(false);
 
-        // Recarregar dados após fechar o formulário
         formStage.setOnHidden(e -> loadData());
 
         formStage.showAndWait();
+    }
+
+    private void editSelected() {
+        MedicineBrand selected = table.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Selecione uma marca para editar.").showAndWait();
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog(selected.getName());
+        dialog.setTitle("Editar Marca");
+        dialog.setHeaderText("Editar nome da marca:");
+        dialog.setContentText("Nome:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent() && !result.get().trim().isEmpty()) {
+            try {
+                controller.update(selected.getId(), result.get().trim());
+                new Alert(Alert.AlertType.INFORMATION, "Marca editada com sucesso!").showAndWait();
+                loadData();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Erro ao editar marca: " + e.getMessage()).showAndWait();
+            }
+        }
     }
 
     private void deleteSelected() {

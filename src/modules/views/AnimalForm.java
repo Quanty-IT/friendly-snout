@@ -53,24 +53,24 @@ public class AnimalForm extends GridPane {
                 "S.R.D",
                 "Shih-tzu",
                 "Yorkshire Terrier",
-                "Spitz AlemÃ£o",
-                "Buldogue FrancÃªs",
+                "Spitz Alemão",
+                "Buldogue Francês",
                 "Poodle",
                 "Lhasa Apso",
                 "Golden Retriever",
                 "Rottweiler",
                 "Labrador Retriever",
                 "Pug",
-                "Pastor AlemÃ£o",
+                "Pastor Alemão",
                 "Border Collie",
                 "Chihuahua de Pelo Longo",
                 "Pastor Belga Malinois",
-                "MaltÃªs"
+                "Maltês"
         );
-        sizeComboBox.getItems().addAll("Pequeno", "MÃ©dio", "Grande");
+        sizeComboBox.getItems().addAll("Pequeno", "Médio", "Grande");
         colorComboBox.getItems().addAll("Preto", "Branco", "Cinza", "Marrom", "Dourado", "Creme", "Canela", "Malhado");
-        fivComboBox.getItems().addAll("Sim", "NÃ£o", "NÃ£o testado");
-        felvComboBox.getItems().addAll("Sim", "NÃ£o", "NÃ£o testado");
+        fivComboBox.getItems().addAll("Sim", "Não", "Não testado");
+        felvComboBox.getItems().addAll("Sim", "Não", "Não testado");
         statusComboBox.getItems().addAll("Quarentena", "Abrigado", "Adotado", "Perdido");
 
         birthdateField = new DatePicker();
@@ -98,8 +98,8 @@ public class AnimalForm extends GridPane {
         int row = 0;
         this.add(new Label("Nome:"), 0, row); this.add(nameField, 1, row++);
         this.add(new Label("Sexo:"), 0, row); this.add(sexComboBox, 1, row++);
-        this.add(new Label("EspÃ©cie:"), 0, row); this.add(speciesComboBox, 1, row++);
-        this.add(new Label("RaÃ§a:"), 0, row); this.add(breedComboBox, 1, row++);
+        this.add(new Label("Espécie:"), 0, row); this.add(speciesComboBox, 1, row++);
+        this.add(new Label("Raça:"), 0, row); this.add(breedComboBox, 1, row++);
         this.add(new Label("Tamanho:"), 0, row); this.add(sizeComboBox, 1, row++);
         this.add(new Label("Cor:"), 0, row); this.add(colorComboBox, 1, row++);
         this.add(new Label("Nascimento:"), 0, row); this.add(birthdateField, 1, row++);
@@ -109,9 +109,8 @@ public class AnimalForm extends GridPane {
         this.add(new Label("FIV:"), 0, row); this.add(fivComboBox, 1, row++);
         this.add(new Label("FeLV:"), 0, row); this.add(felvComboBox, 1, row++);
         this.add(new Label("Status:"), 0, row); this.add(statusComboBox, 1, row++);
-        this.add(new Label("ObservaÃ§Ãµes:"), 0, row); this.add(notesField, 1, row++);
+        this.add(new Label("Observações:"), 0, row); this.add(notesField, 1, row++);
 
-        // Criando um HBox para os botões ficarem lado a lado
         HBox buttonBox = new HBox(10);
         buttonBox.getChildren().addAll(saveButton, medicineButton);
         this.add(buttonBox, 1, row);
@@ -194,7 +193,7 @@ public class AnimalForm extends GridPane {
     private String convertSex(String v) {
         return switch (v) {
             case "Macho" -> "male";
-            case "FÃªmea" -> "female";
+            case "Fêmea" -> "female";
             default -> null;
         };
     }
@@ -212,19 +211,19 @@ public class AnimalForm extends GridPane {
             case "S.R.D" -> "mixed-breed";
             case "Shih-tzu" -> "shih-tzu";
             case "Yorkshire Terrier" -> "yorkshire-terrier";
-            case "Spitz AlemÃ£o" -> "german-spitz";
-            case "Buldogue FrancÃªs" -> "french-bulldog";
+            case "Spitz Alemão" -> "german-spitz";
+            case "Buldogue Francês" -> "french-bulldog";
             case "Poodle" -> "poodle";
             case "Lhasa Apso" -> "lhasa-apso";
             case "Golden Retriever" -> "golden-retriever";
             case "Rottweiler" -> "rottweiler";
             case "Labrador Retriever" -> "labrador-retriever";
             case "Pug" -> "pug";
-            case "Pastor AlemÃ£o" -> "german-shepherd";
+            case "Pastor Alemão" -> "german-shepherd";
             case "Border Collie" -> "border-collie";
             case "Chihuahua de Pelo Longo" -> "long-haired-chihuahua";
             case "Pastor Belga Malinois" -> "belgian-malinois";
-            case "MaltÃªs" -> "maltese";
+            case "Maltês" -> "maltese";
             default -> null;
         };
     }
@@ -232,7 +231,7 @@ public class AnimalForm extends GridPane {
     private String convertSize(String v) {
         return switch (v) {
             case "Pequeno" -> "small";
-            case "MÃ©dio" -> "medium";
+            case "Médio" -> "medium";
             case "Grande" -> "large";
             default -> null;
         };
@@ -255,8 +254,8 @@ public class AnimalForm extends GridPane {
     private String convertYesNoNotTested(String v) {
         return switch (v) {
             case "Sim" -> "yes";
-            case "NÃ£o" -> "no";
-            case "NÃ£o testado" -> "not-tested";
+            case "Não" -> "no";
+            case "Não testado" -> "not-tested";
             default -> null;
         };
     }
